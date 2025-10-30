@@ -51,11 +51,11 @@
           <div class="step-header">
             <i class="bi bi-person-check icon"></i>
             <h3 id="nameStep2">DNI NO ENCONTRADO</h3> <!-- El nombre será reemplazado aquí -->
-            <span>No hemos encontrado tu nombre con tu DNI</span>
+            <span id="dniEncontrado">No hemos encontrado tu nombre con tu DNI</span>
           </div>
           <div class="step-content">
             <div class="d-flex gap-3">
-              <button type="button" class="btn btn-custom w-50" onclick="confirmIdentity(true)">Sí, soy yo</button>
+              <button id="confirmBtn" type="button" class="btn btn-custom w-50" onclick="confirmIdentity(true)">Sí, soy yo</button>
               <button type="button" class="btn btn-custom w-50" onclick="goBackToStep1()">Editar DNI</button>
             </div>
             <button type="button" class="btn btn-custom w-100 mt-3" onclick="searchManually()">Llenar manualmente</button>
@@ -77,7 +77,7 @@
             <input type="text" id="distrito" name="distrito" class="form-control mt-3" placeholder="Distrito" />
             <input type="text" id="direccion" name="direccion" class="form-control mt-3" placeholder="Dirección" />
             <input type="text" id="ocupacion" name="ocupacion" class="form-control mt-3" placeholder="ocupacion" value="MOTOTAXISTA" />
-            <button id="completarFomr" type="button" class="btn btn-custom w-100 mt-3" onclick="continueRegistration()" disabled>Continuar</button>
+            <button id="completarFomr" type="button" class="btn btn-custom w-100 mt-3" onclick="continueRegistration()">Continuar</button>
           </div>
         </div>
 
