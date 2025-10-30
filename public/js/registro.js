@@ -18,55 +18,47 @@ function consultaDni(dni) {
 
   fetch(apiUrl, {
     method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { Authorization: `Bearer ${token}` },
   })
-    .then((response) => response.json())
-    .then((data) => {
+    .then(response => response.json())
+    .then(data => {
       console.log(data);
-      // Rellenar datos del formulario
-        document.getElementById("apellidoPaterno").value =
-          data.data.apellido_paterno || "";
-        document.getElementById("apellidoMaterno").value =
-          data.data.apellido_materno || "";
-        document.getElementById("region").value =
-          data.data.direccion_departamento || "";
-        document.getElementById("provincia").value =
-          data.data.direccion_provincia || "";
-        document.getElementById("distrito").value =
-          data.data.direccion_distrito || "";
-        document.getElementById("direccion").value =
-          data.data.direccion || "";
-      if (data.success) {
-        
-        document.getElementById("nombre").value = data.data.nombres || "";
-        // Mostrar nombre dinámico en el paso 2
-        document.getElementById(
-          "nameStep2"
-        ).innerText = `¿ERES ${data.data.nombres}?`;
 
-        
-        // Ir al paso 2
+      const campos = ["nombre", "apellidoPaterno", "apellidoMaterno", "region", "provincia", "distrito", "direccion"];
+      const confirmBtn = document.getElementById("confirmBtn");
+      const completarForm = document.getElementById("completarFomr");
+      const nameStep2 = document.getElementById("nameStep2");
+      const dniEncontrado = document.getElementById("dniEncontrado");
+
+      if (data.success) {
+        const info = data.data;
+
+        // Rellenar campos
+        document.getElementById("nombre").value = info.nombres || "";
+        document.getElementById("apellidoPaterno").value = info.apellido_paterno || "";
+        document.getElementById("apellidoMaterno").value = info.apellido_materno || "";
+        document.getElementById("region").value = info.direccion_departamento || "";
+        document.getElementById("provincia").value = info.direccion_provincia || "";
+        document.getElementById("distrito").value = info.direccion_distrito || "";
+        document.getElementById("direccion").value = info.direccion || "";
+
+        // Actualizar vista
+        nameStep2.innerText = `¿ERES ${info.nombres}?`;
         showStep(2);
         progressBar.style.width = "67%";
-
-        document.getElementById("confirmBtn").disabled = false;   
+        confirmBtn.disabled = false;
+        completarForm.disabled = false;
       } else {
-
-        // Mostrar nombre dinámico en el paso 2
-        document.getElementById(
-          "nameStep2"
-        ).innerText = `DNI NO ENCONTRADO`
-        document.getElementById(
-          "dniEncontrado"
-        ).innerText = `No hemos encontrado tu nombre con tu DNI`
+        // Limpiar campos si no se encuentra el DNI
+        campos.forEach(id => (document.getElementById(id).value = ""));
+        nameStep2.innerText = "DNI NO ENCONTRADO";
+        dniEncontrado.innerText = "No hemos encontrado tu nombre con tu DNI";
         showStep(2);
-        document.getElementById("confirmBtn").disabled = true; 
-
+        confirmBtn.disabled = true;
+        completarForm.disabled = true;
       }
     })
-    .catch((error) => {
+    .catch(error => {
       console.error("Error al consultar la API de RENIEC:", error);
       alert("Hubo un error al consultar la API.");
     });
