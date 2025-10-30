@@ -38,11 +38,13 @@ function consultaDni(dni) {
           data.data.direccion_provincia || "";
         document.getElementById("distrito").value =
           data.data.direccion_distrito || "";
+        document.getElementById("direccion").value =
+          data.data.direccion || "";
 
         // Mostrar nombre dinámico en el paso 2
         document.getElementById(
           "nameStep2"
-        ).innerText = `¿ERES ${data.data.nombre}?`;
+        ).innerText = `¿ERES ${data.data.nombres}?`;
 
         // Ir al paso 2
         showStep(2);
