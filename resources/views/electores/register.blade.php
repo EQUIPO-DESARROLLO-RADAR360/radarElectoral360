@@ -42,7 +42,7 @@
         <div id="step2" class="step">
           <div class="step-header">
             <i class="bi bi-person-check icon"></i>
-            <h3>¿Eres Juan Pérez?</h3>
+            <h3 id="nameStep2">¿Eres Juan Pérez?</h3> <!-- El nombre será reemplazado aquí -->
             <span>Hemos encontrado este nombre con tu DNI</span>
           </div>
           <div class="step-content">
@@ -70,6 +70,21 @@
             <input type="text" id="direccion" class="form-control mt-3" placeholder="Dirección" />
             <button class="btn btn-custom w-100 mt-3" onclick="continueRegistration()">Continuar</button>
           </div>
+        </div>
+
+        <div id="step3" class="step" style="display: none;">
+            <div class="step-header">
+                <h3>Completa tu registro</h3>
+            </div>
+            <div class="step-content">
+                <input type="text" id="whatsapp" class="form-control" placeholder="Ej: +51 987654321">
+                <input type="text" id="bingoCode" class="form-control mt-3" placeholder="Código alfanumérico">
+                <div class="form-check mt-3">
+                    <input type="checkbox" id="terms" class="form-check-input">
+                    <label for="terms" class="form-check-label">Acepto los términos y condiciones</label>
+                </div>
+                <button id="finalizeBtn" class="btn btn-custom w-100 mt-3" onclick="finalizeRegistration()" disabled>Finalizar Registro</button>
+            </div>
         </div>
 
         <!-- Paso 4: Confirmación final -->
