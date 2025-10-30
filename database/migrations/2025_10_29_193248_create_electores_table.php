@@ -15,16 +15,18 @@ return new class extends Migration
     {
         Schema::create('electores', function (Blueprint $table) {
             $table->id();
-            $table->string('dni')->unique();
+            $table->string('dni');
             $table->string('nombres');
             $table->string('apellidP');
             $table->string('apellidoM');
             $table->string('region');
             $table->string('provincia');
             $table->string('distrito');
+            $table->string('direccion');
             $table->string('ocupacion');
-            $table->string('whatsapp')->unique();
-            $table->string('ticked')->unique();
+            $table->string('whatsapp');
+            $table->string('ticked');
+            $table->boolean('terms_accepted')->default(false);
             $table->timestamps();
         });
     }

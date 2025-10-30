@@ -17,22 +17,49 @@ class ElectorController extends Controller
     // Guarda los datos del registro
     public function store(Request $request)
     {
-/*        // Validar los datos
+        // Validar los datos
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:electores,email',
-            'dni' => 'required|unique:electores,dni',
+            'dni' => 'required|string|max:255',    
+            'nombre' => 'required|string|max:255',
+            'apellidoPaterno' => 'required|string|max:255',
+            'apellidoMaterno' => 'required|string|max:255',
+            'region' => 'required|string|max:255',
+            'provincia' => 'required|string|max:255',
+            'distrito' => 'required|string|max:255',
+            'direccion' => 'required|string|max:255',
+            'ocupacion' => 'required|string|max:255',
+            'whatsapp' => 'required|string|max:255',
+            'bingoCode' => 'required|string|max:255',
+            'terms' => 'accepted',
         ]);
+
+        // Convertir el valor de "terms" a un booleano
+        $termsAccepted = $request->has('terms') ? 1 : 0;
 
         // Crear el nuevo elector
         $elector = Electores::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
             'dni' => $validated['dni'],
+            'nombres' => $validated['nombre'],
+            'apellidP' => $validated['apellidoPaterno'],
+            'apellidoM' => $validated['apellidoMaterno'],
+            'region' => $validated['region'],
+            'provincia' => $validated['provincia'],
+            'distrito' => $validated['distrito'],
+            'direccion' => $validated['direccion'],
+            'ocupacion' => $validated['ocupacion'],
+            'whatsapp' => $validated['whatsapp'],
+            'ticked' => $validated['bingoCode'],
+            'terms_accepted' => $termsAccepted,
         ]);
 
         // Redirigir después de guardar el elector
-        return redirect()->route('electores.create')->with('success', 'Registro exitoso');*/
-        return $request;
+        return redirect()->route('electores.success', ['nombre' => $validated['nombre']])
+        ->with('success', 'Registro exitoso');
+        //return $request;
+    }
+
+    public function success($nombre)
+    {
+        return view('electores.success', compact('nombre'));
     }
 }

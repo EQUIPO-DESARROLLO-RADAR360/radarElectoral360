@@ -18,5 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', [ElectorController::class, 'create'])->name('electores.create');
-Route::post('/register', [ElectorController::class, 'store'])->name('electores.store');;
+Route::get('/registro', [ElectorController::class, 'create'])->name('electores.create');
+Route::post('/registro', [ElectorController::class, 'store'])->name('electores.store');
+Route::get('/registro/success/{nombre}', [ElectorController::class, 'success'])->name('electores.success');
