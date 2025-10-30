@@ -17,7 +17,7 @@ class ElectorController extends Controller
     // Guarda los datos del registro
     public function store(Request $request)
     {
-        // Validar los datos
+/*        // Validar los datos
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:electores,email',
@@ -32,6 +32,7 @@ class ElectorController extends Controller
         ]);
 
         // Redirigir después de guardar el elector
-        return redirect()->route('electores.create')->with('success', 'Registro exitoso');
+        return redirect()->route('electores.create')->with('success', 'Registro exitoso');*/
+        return $request;
     }
 }

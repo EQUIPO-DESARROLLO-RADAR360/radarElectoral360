@@ -14,7 +14,7 @@
 <body>
   <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="w-100" style="max-width: 450px;">
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center padre-span">
         <div class="text-left"><span>Paso 1 de 3</span></div>
         <div class="text-right"><span>33%</span></div>
       </div>
@@ -23,7 +23,12 @@
       </div>
 
       <div class="card">
-        <!-- Paso 1 -->
+
+      <!-- Formulario -->
+      <form action="{{ route('electores.store') }}" method="POST">
+      @csrf
+
+        <!-- Paso 1 Ingresar DNI-->
         <div id="step1" class="step active">
           <div class="step-header padding-20">
             <i class="bi bi-card-list icon"></i>
@@ -32,13 +37,16 @@
           </div>
           <div class="step-content">
             <label class="color-fuerte padding-10">Número de DNI</label>
-            <input type="text" id="dni" class="form-control" placeholder="12345678" maxlength="8" />
+            <input type="text" id="dni" name="dni" class="form-control" placeholder="12345678" maxlength="8" />
             <div id="dniError" class="text-danger" style="display: none;">Ingresa un DNI válido (8 dígitos).</div>
-            <button id="nextBtn" class="btn btn-custom w-100 mt-3" onclick="nextStep(1)" disabled>Siguiente</button>
+            <button id="nextBtn" type="button" class="btn btn-custom w-100 mt-3" onclick="nextStep(1)" disabled> 
+              <span id="spinner" class="spinner-border spinner-border-sm" style="display: none;" role="status"></span>
+              <span id="nextBtnText">Siguiente</span>
+            </button>
           </div>
         </div>
 
-        <!-- Paso 2 -->
+        <!-- Paso 2 Verifica si encontró-->
         <div id="step2" class="step">
           <div class="step-header">
             <i class="bi bi-person-check icon"></i>
@@ -47,10 +55,10 @@
           </div>
           <div class="step-content">
             <div class="d-flex gap-3">
-              <button class="btn btn-custom w-50" onclick="confirmIdentity(true)">Sí, soy yo</button>
-              <button class="btn btn-custom w-50" onclick="goBackToStep1()">No soy</button>
+              <button type="button" class="btn btn-custom w-50" onclick="confirmIdentity(true)">Sí, soy yo</button>
+              <button type="button" class="btn btn-custom w-50" onclick="goBackToStep1()">Editar DNI</button>
             </div>
-            <button class="btn btn-custom w-100 mt-3" onclick="searchManually()">No encontraron mi nombre</button>
+            <button type="button" class="btn btn-custom w-100 mt-3" onclick="searchManually()">Llenar manualmente</button>
           </div>
         </div>
 
@@ -61,34 +69,38 @@
             <h3>Completa tus datos</h3>
           </div>
           <div class="step-content">
-            <input type="text" id="nombre" class="form-control mt-3" placeholder="Nombre" />
-            <input type="text" id="apellidoPaterno" class="form-control mt-3" placeholder="Apellido Paterno" />
-            <input type="text" id="apellidoMaterno" class="form-control mt-3" placeholder="Apellido Materno" />
-            <input type="text" id="region" class="form-control mt-3" placeholder="Región" />
-            <input type="text" id="provincia" class="form-control mt-3" placeholder="Provincia" />
-            <input type="text" id="distrito" class="form-control mt-3" placeholder="Distrito" />
-            <input type="text" id="direccion" class="form-control mt-3" placeholder="Dirección" />
-            <button class="btn btn-custom w-100 mt-3" onclick="continueRegistration()">Continuar</button>
+            <input type="text" id="nombre" name="nombre" class="form-control mt-3" placeholder="Nombre" />
+            <input type="text" id="apellidoPaterno" name="apellidoPaterno" class="form-control mt-3" placeholder="Apellido Paterno" />
+            <input type="text" id="apellidoMaterno" name="apellidoMaterno" class="form-control mt-3" placeholder="Apellido Materno" />
+            <input type="text" id="region" name="region" class="form-control mt-3" placeholder="Región" />
+            <input type="text" id="provincia" name="provincia" class="form-control mt-3" placeholder="Provincia" />
+            <input type="text" id="distrito" name="distrito" class="form-control mt-3" placeholder="Distrito" />
+            <input type="text" id="direccion" name="direccion" class="form-control mt-3" placeholder="Dirección" />
+            <input type="text" id="ocupacion" name="ocupacion" class="form-control mt-3" placeholder="ocupacion" value="MOTOTAXISTA" />
+            <button type="button" class="btn btn-custom w-100 mt-3" onclick="continueRegistration()">Continuar</button>
           </div>
         </div>
 
-        <div id="step3" class="step" style="display: none;">
+        <!-- Paso 4: Completar registro -->
+        <div id="step4" class="step">
             <div class="step-header">
                 <h3>Completa tu registro</h3>
             </div>
             <div class="step-content">
-                <input type="text" id="whatsapp" class="form-control" placeholder="Ej: +51 987654321">
-                <input type="text" id="bingoCode" class="form-control mt-3" placeholder="Código alfanumérico">
+                <input type="text" id="whatsapp" name="whatsapp" class="form-control" placeholder="Ej: +51 987654321">
+                <input type="text" id="bingoCode" name="bingoCode" class="form-control mt-3" placeholder="Código alfanumérico">
                 <div class="form-check mt-3">
-                    <input type="checkbox" id="terms" class="form-check-input">
+                    <input type="checkbox" id="terms" name="terms" class="form-check-input">
                     <label for="terms" class="form-check-label">Acepto los términos y condiciones</label>
                 </div>
-                <button id="finalizeBtn" class="btn btn-custom w-100 mt-3" onclick="finalizeRegistration()" disabled>Finalizar Registro</button>
+                <button id="finalizeBtn" type="submit" class="btn btn-custom w-100 mt-3" onclick="finalizeRegistration()" disabled>Finalizar Registro</button>
             </div>
         </div>
+      </form>
 
-        <!-- Paso 4: Confirmación final -->
-        <div id="step4" class="step">
+
+        <!-- Paso 5: Confirmación final -->
+        <div id="step5" class="step">
           <div class="step-header">
             <i class="bi bi-check-circle icon"></i>
             <h3>¡Gracias por participar!</h3>

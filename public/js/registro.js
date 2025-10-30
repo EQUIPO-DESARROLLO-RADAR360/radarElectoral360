@@ -11,98 +11,107 @@ const steps = {
   4: document.getElementById("step4"),
 };
 
-// Función para consultar la API de RENIEC
+// === FUNCIÓN: CONSULTAR API DE RENIEC ===
 function consultaDni(dni) {
   const apiUrl = `https://apiperu.info/api/dni/plus/${dni}`;
-  const token = "mWBrDbQ2fKbVw6PMJTuJxRtYX8UKcccaVYOzYwOtFxN4t7uudE"; // Token proporcionado
-  
-  // Realizar la consulta AJAX usando Fetch
+  const token = "mWBrDbQ2fKbVw6PMJTuJxRtYX8UKcccaVYOzYwOtFxN4t7uudE";
+
   fetch(apiUrl, {
     method: "GET",
     headers: {
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data); // Verifica la respuesta de la API
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
       if (data.success) {
-        // Asignar los valores obtenidos de la API a los campos del formulario
+        // Rellenar datos del formulario
         document.getElementById("nombre").value = data.data.nombres || "";
-        document.getElementById("apellidoPaterno").value = data.data.apellido_paterno || "";
-        document.getElementById("apellidoMaterno").value = data.data.apellido_materno || "";
-        document.getElementById("region").value = data.data.direccion_departamento || "";
-        document.getElementById("provincia").value = data.data.direccion_provincia || "";
-        document.getElementById("distrito").value = data.data.direccion_distrito || "";
+        document.getElementById("apellidoPaterno").value =
+          data.data.apellido_paterno || "";
+        document.getElementById("apellidoMaterno").value =
+          data.data.apellido_materno || "";
+        document.getElementById("region").value =
+          data.data.direccion_departamento || "";
+        document.getElementById("provincia").value =
+          data.data.direccion_provincia || "";
+        document.getElementById("distrito").value =
+          data.data.direccion_distrito || "";
 
-        // Paso 2: Mostrar el nombre encontrado en la etiqueta correspondiente
-        //document.getElementById("nameStep2").innerText = `Eres ${data.data.nombres}`; // Mostrar el nombre en el paso 2
+        // Mostrar nombre dinámico en el paso 2
+        document.getElementById(
+          "nameStep2"
+        ).innerText = `¿ERES ${data.data.nombres}?`;
 
-        showStep(2); // Muestra el paso 2
-        progressBar.style.width = "67%"; // Actualiza la barra de progreso
+        // Ir al paso 2
+        showStep(2);
+        progressBar.style.width = "67%";
       } else {
-        // Si el DNI no existe, mostrar el mensaje de error
-        alert("No se encontró el DNI en el sistema");
+        //alert("No se encontró el DNI en el sistema");
+        showStep(2);
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error al consultar la API de RENIEC:", error);
       alert("Hubo un error al consultar la API.");
     });
 }
 
-
-
-// Función para pasar entre los pasos
+// === FUNCIÓN: PASAR ENTRE PASOS ===
 function nextStep(currentStep) {
   if (currentStep === 1) {
     if (dniInput.value.length === 8) {
+      //consultaDni(dniInput.value);
+      // Cambiar texto del botón y mostrar spinner
+      document.getElementById("spinner").style.display = "inline-block"; // Mostrar spinner
+      document.getElementById("nextBtnText").innerText = "Consultando";
+      document.getElementById("nextBtn").disabled = true; // Desactivar el botón
+
       // Realizar consulta a la API con el DNI ingresado
       consultaDni(dniInput.value);
-      progressBar.style.width = "67%"; // Actualiza la barra de progreso
     } else {
-      dniError.style.display = "block"; // Error en DNI
+      dniError.style.display = "block";
     }
-  } else if (currentStep === 2) {
-    showStep(3);
-    progressBar.style.width = "100%"; // Completar barra de progreso
   }
 }
 
-// Cambiar entre pasos
+// === FUNCIÓN: MOSTRAR EL PASO CORRESPONDIENTE ===
 function showStep(stepNumber) {
-  Object.values(steps).forEach((step) => step.classList.remove("active"));
+  Object.values(steps).forEach((step) => {
+    step.classList.remove("active");
+    step.style.display = "none"; // Oculta todos
+  });
+
   steps[stepNumber].classList.add("active");
+  steps[stepNumber].style.display = "block"; // Muestra el actual
 }
 
-// Confirmación de identidad
+// === FUNCIÓN: CONFIRMAR IDENTIDAD ===
 function confirmIdentity(isConfirmed) {
   if (isConfirmed) {
-    // Rellenar los campos con los datos obtenidos de la API
-    document.getElementById("nombre").value = document.getElementById("nombre").value || '';
-    document.getElementById("apellidoPaterno").value = document.getElementById("apellidoPaterno").value || '';
-    document.getElementById("apellidoMaterno").value = document.getElementById("apellidoMaterno").value || '';
-    document.getElementById("region").value = document.getElementById("region").value || '';
-    document.getElementById("provincia").value = document.getElementById("provincia").value || '';
-    document.getElementById("distrito").value = document.getElementById("distrito").value || '';
-
-    showStep(3); // Si es el mismo, ir directo al Paso 3
-    progressBar.style.width = "100%"; // Actualiza la barra de progreso
+    showStep(4); // Ir directo al paso 4 (final)
+    progressBar.style.width = "100%";
   } else {
-    goBackToStep1(); // Si no es la misma persona
+    goBackToStep1();
   }
 }
 
-// Volver al paso 1
+// === FUNCIÓN: VOLVER AL PASO 1 ===
 function goBackToStep1() {
   showStep(1);
-  progressBar.style.width = "33%"; // Barra de progreso
+  progressBar.style.width = "33%";
+
+  // Resetear el estado del botón
+  document.getElementById("nextBtnText").innerText = "Siguiente"; // Vuelve el texto a "Siguiente"
+  document.getElementById("spinner").style.display = "none"; // Oculta el spinner
+  document.getElementById("nextBtn").disabled = false; // Habilita el botón
 }
 
-// Si el DNI no se encuentra, ir al formulario
+// === FUNCIÓN: IR AL FORMULARIO MANUAL (NO SE ENCONTRÓ EN API) ===
 function searchManually() {
   showStep(3);
-  progressBar.style.width = "67%"; // Barra de progreso
+  progressBar.style.width = "67%";
 }
 
 // Continuar al paso final
@@ -112,19 +121,59 @@ function continueRegistration() {
   progressBar.style.width = "100%"; // Barra de progreso
 }
 
-// Reiniciar el proceso
+// === FUNCIÓN: COMPLETAR REGISTRO FINAL ===
+function finalizeRegistration() {
+  const whatsapp = document.getElementById("whatsapp").value.trim();
+  const bingoCode = document.getElementById("bingoCode").value.trim();
+  const termsCheckbox = document.getElementById("terms");
+
+  if (whatsapp && bingoCode && termsCheckbox.checked) {
+    showStep(4);
+    ticketNumber.innerText = "XYZ123";
+    progressBar.style.width = "100%";
+  } else {
+    alert("Por favor completa todos los campos y acepta los términos.");
+  }
+}
+
+// === VALIDACIÓN DINÁMICA PARA ACTIVAR BOTÓN DE FINALIZAR ===
+const whatsappInput = document.getElementById("whatsapp");
+const bingoInput = document.getElementById("bingoCode");
+const termsCheckbox = document.getElementById("terms");
+const finalizeBtn = document.getElementById("finalizeBtn");
+
+function checkFormCompletion() {
+  if (
+    whatsappInput.value.trim() &&
+    bingoInput.value.trim() &&
+    termsCheckbox.checked
+  ) {
+    finalizeBtn.disabled = false;
+  } else {
+    finalizeBtn.disabled = true;
+  }
+}
+
+// Escuchar eventos
+if (whatsappInput && bingoInput && termsCheckbox) {
+  whatsappInput.addEventListener("input", checkFormCompletion);
+  bingoInput.addEventListener("input", checkFormCompletion);
+  termsCheckbox.addEventListener("change", checkFormCompletion);
+}
+
+// === FUNCIÓN: REINICIAR PROCESO ===
 function restart() {
   dniInput.value = "";
   nextBtn.disabled = true;
-  progressBar.style.width = "33%"; // Barra de progreso inicial
+  progressBar.style.width = "33%";
   showStep(1);
 }
 
-// Activar el botón "Siguiente" si el DNI es válido
+// === HABILITAR BOTÓN SIGUIENTE SI DNI ES VÁLIDO ===
 dniInput.addEventListener("input", () => {
   if (dniInput.value.length === 8) {
     nextBtn.disabled = false;
-    dniError.style.display = "none"; // Ocultar error
+    dniError.style.display = "none";
   } else {
     nextBtn.disabled = true;
   }
