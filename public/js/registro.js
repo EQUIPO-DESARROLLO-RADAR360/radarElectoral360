@@ -25,9 +25,7 @@ function consultaDni(dni) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      if (data.success) {
-        // Rellenar datos del formulario
-        document.getElementById("nombre").value = data.data.nombres || "";
+      // Rellenar datos del formulario
         document.getElementById("apellidoPaterno").value =
           data.data.apellido_paterno || "";
         document.getElementById("apellidoMaterno").value =
@@ -40,18 +38,32 @@ function consultaDni(dni) {
           data.data.direccion_distrito || "";
         document.getElementById("direccion").value =
           data.data.direccion || "";
-
+      if (data.success) {
+        
+        document.getElementById("nombre").value = data.data.nombres || "";
         // Mostrar nombre dinámico en el paso 2
         document.getElementById(
           "nameStep2"
         ).innerText = `¿ERES ${data.data.nombres}?`;
 
+        
         // Ir al paso 2
         showStep(2);
         progressBar.style.width = "67%";
+
+        document.getElementById("confirmBtn").disabled = false;   
       } else {
-        
+
+        // Mostrar nombre dinámico en el paso 2
+        document.getElementById(
+          "nameStep2"
+        ).innerText = `DNI NO ENCONTRADO`
+        document.getElementById(
+          "dniEncontrado"
+        ).innerText = `No hemos encontrado tu nombre con tu DNI`
         showStep(2);
+        document.getElementById("confirmBtn").disabled = true; 
+
       }
     })
     .catch((error) => {
@@ -170,6 +182,7 @@ if (whatsappInput && bingoInput && termsCheckbox) {
   bingoInput.addEventListener("input", checkFormCompletion);
   termsCheckbox.addEventListener("change", checkFormCompletion);
 }
+
 
 // === FUNCIÓN: REINICIAR PROCESO ===
 function restart() {
