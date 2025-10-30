@@ -50,8 +50,8 @@
         <div id="step2" class="step">
           <div class="step-header">
             <i class="bi bi-person-check icon"></i>
-            <h3 id="nameStep2">¿Eres Juan Pérez?</h3> <!-- El nombre será reemplazado aquí -->
-            <span>Hemos encontrado este nombre con tu DNI</span>
+            <h3 id="nameStep2">DNI NO ENCONTRADO</h3> <!-- El nombre será reemplazado aquí -->
+            <span>No hemos encontrado tu nombre con tu DNI</span>
           </div>
           <div class="step-content">
             <div class="d-flex gap-3">
@@ -77,7 +77,7 @@
             <input type="text" id="distrito" name="distrito" class="form-control mt-3" placeholder="Distrito" />
             <input type="text" id="direccion" name="direccion" class="form-control mt-3" placeholder="Dirección" />
             <input type="text" id="ocupacion" name="ocupacion" class="form-control mt-3" placeholder="ocupacion" value="MOTOTAXISTA" />
-            <button type="button" class="btn btn-custom w-100 mt-3" onclick="continueRegistration()">Continuar</button>
+            <button id="completarFomr" type="button" class="btn btn-custom w-100 mt-3" onclick="continueRegistration()" disabled>Continuar</button>
           </div>
         </div>
 

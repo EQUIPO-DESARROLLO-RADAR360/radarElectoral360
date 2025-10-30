@@ -42,13 +42,13 @@ function consultaDni(dni) {
         // Mostrar nombre dinámico en el paso 2
         document.getElementById(
           "nameStep2"
-        ).innerText = `¿ERES ${data.data.nombres}?`;
+        ).innerText = `¿ERES ${data.data.nombre}?`;
 
         // Ir al paso 2
         showStep(2);
         progressBar.style.width = "67%";
       } else {
-        //alert("No se encontró el DNI en el sistema");
+        
         showStep(2);
       }
     })
@@ -116,9 +116,17 @@ function searchManually() {
 
 // Continuar al paso final
 function continueRegistration() {
-  showStep(4);
-  ticketNumber.innerText = "XYZ123"; // Mostrar el número de cartón
-  progressBar.style.width = "100%"; // Barra de progreso
+  const aPaterno = document.getElementById("apellidoPaterno").value.trim();
+  const aMaterno = document.getElementById("apellidoMaterno").value.trim();
+
+  if (aPaterno && aMaterno) {
+    showStep(4);
+    ticketNumber.innerText = "XYZ123";
+    progressBar.style.width = "100%";
+  } else {
+    alert("Por favor completa todos los campos y acepta los términos.");
+  }
+
 }
 
 // === FUNCIÓN: COMPLETAR REGISTRO FINAL ===
