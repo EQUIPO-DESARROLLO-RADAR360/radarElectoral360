@@ -77,7 +77,7 @@
             <input type="text" id="distrito" name="distrito" class="form-control mt-3" placeholder="Distrito" />
             <input type="text" id="direccion" name="direccion" class="form-control mt-3" placeholder="Dirección" />
             <input type="text" id="ocupacion" name="ocupacion" class="form-control mt-3" placeholder="ocupacion" value="MOTOTAXISTA" />
-            <button id="completarFomr" type="button" class="btn btn-custom w-100 mt-3" onclick="continueRegistration()" disabled>Continuar</button>
+            <button id="completarFomr" type="button" class="btn btn-custom w-100 mt-3" onclick="continueRegistration()">Continuar</button>
           </div>
         </div>
 
