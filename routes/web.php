@@ -18,6 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Ruta para verificar si el DNI ya está registrado
+Route::get('/verificar-dni/{dni}', [ElectorController::class, 'verificarDni']);
+Route::get('/registro/encontrado/{dni}', [ElectorController::class, 'encontrado'])->name('electores.encontrado');
+
 Route::get('/registro', [ElectorController::class, 'create'])->name('electores.create');
 Route::post('/registro', [ElectorController::class, 'store'])->name('electores.store');
-Route::get('/registro/success/{nombre}', [ElectorController::class, 'success'])->name('electores.success');
+Route::get('/registro/success/{nombre}/{ticked}', [ElectorController::class, 'success'])->name('electores.success');
+

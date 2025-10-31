@@ -42,14 +42,14 @@
               <span> Número de ticked</i></span>
             </div>
             <div class="col-12">
-              <span class="form-control color-ticked"> {{ $ticked }}</i></span>
+              <span class="form-control color-ticked"> {{ $ticket }}</i></span>
             </div>
           </div>
 
           <a href="{{ route('electores.create') }}" class="btn btn-custom w-100 mt-3">
               <span id="nextBtnText">Ir a inicio</span>
           </a>
-          
+
         </div>
       </div>
     </div>

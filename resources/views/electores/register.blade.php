@@ -15,8 +15,8 @@
   <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="w-100" style="max-width: 450px;">
       <div class="d-flex justify-content-between align-items-center padre-span">
-        <div class="text-left"><span>Paso 1 de 3</span></div>
-        <div class="text-right"><span>33%</span></div>
+        <div id="stepText1" class="text-left"><span>Paso 1 de 3</span></div>
+        <div id="stepText2" class="text-right"><span>33%</span></div>
       </div>
       <div class="progress">
         <div class="progress-bar w-33" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
@@ -87,8 +87,13 @@
                 <h3>Completa tu registro</h3>
             </div>
             <div class="step-content">
-                <input type="text" id="whatsapp" name="whatsapp" class="form-control" placeholder="Ej: +51 987654321">
-                <input type="text" id="bingoCode" name="bingoCode" class="form-control mt-3" placeholder="Código alfanumérico">
+              <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">+51</span>
+                    <input type="text" id="whatsapp" name="whatsapp" class="form-control" placeholder="Ej: 987654321" aria-describedby="basic-addon1">
+                </div>
+                
+                <input type="text" id="bingoCode" name="bingoCode" class="form-control mt-3" placeholder="Número de ticked">
+
                 <div class="form-check mt-3">
                     <input type="checkbox" id="terms" name="terms" class="form-check-input">
                     <label for="terms" class="form-check-label">Acepto los términos y condiciones</label>

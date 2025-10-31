@@ -52,14 +52,39 @@ class ElectorController extends Controller
             'terms_accepted' => $termsAccepted,
         ]);
 
-        // Redirigir después de guardar el elector
-        return redirect()->route('electores.success', ['nombre' => $validated['nombre']])
-        ->with('success', 'Registro exitoso');
-        //return $request;
+        // Redirigir después de guardar el elector, pasando nombre y ticket
+        return redirect()->route('electores.success', [
+            'nombre' => $validated['nombre'],
+            'ticked' => $validated['bingoCode']
+        ]);
     }
 
-    public function success($nombre)
+    public function success($nombre, $ticked)
     {
-        return view('electores.success', compact('nombre'));
+        return view('electores.success', compact('nombre', 'ticked'));
+    }
+
+    public function verificarDni($dni)
+    {
+        $exists = Electores::where('dni', $dni)->exists(); // Verifica si el DNI ya está registrado
+        return response()->json(['exists' => $exists]);
+    }
+
+    public function encontrado($dni)
+    {
+        // Buscar el elector por su DNI
+        $elector = Electores::where('dni', $dni)->first();
+
+        // Verificar si el elector existe
+        if ($elector) {
+            // Retornar vista con el nombre y el ticket
+            return view('electores.encontrado', [
+                'nombre' => $elector->nombres,
+                'ticket' => $elector->ticked, // Asegúrate de que el campo "ticked" exista en tu base de datos
+            ]);
+        } else {
+            // Si el elector no se encuentra, puedes redirigir a otra página o mostrar un mensaje de error
+            return redirect()->route('electores.register');
+        }
     }
 }
