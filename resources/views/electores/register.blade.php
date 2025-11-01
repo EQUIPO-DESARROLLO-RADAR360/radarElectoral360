@@ -92,7 +92,7 @@
                     <input type="number" id="whatsapp" name="whatsapp" class="form-control" placeholder="Ej: 987654321" aria-describedby="basic-addon1">
                 </div>
                 
-                <input type="text" id="bingoCode" name="bingoCode" class="form-control mt-3" placeholder="Número de ticked">
+                <input type="number" id="bingoCode" name="bingoCode" class="form-control mt-3" placeholder="Número de ticked">
 
                 <div class="form-check mt-3">
                     <input type="checkbox" id="terms" name="terms" class="form-check-input">
