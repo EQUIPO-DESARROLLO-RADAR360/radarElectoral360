@@ -32,12 +32,12 @@ function nextStep(currentStep) {
 
 // === FUNCIÓN: VERIFICAR SI EL DNI YA ESTÁ REGISTRADO ===
 function checkDniExistence(dni) {
-  fetch(`/verificar-dni/${dni}`)
+  fetch(`/ciudadano-dni/${dni}`)
     .then(response => response.json())
     .then(data => {
       if (data.exists) {
          // Si el DNI ya existe, redirigir a la ruta con el DNI
-        window.location.href = `/registro/encontrado/${dni}`; // Redirigir a la ruta con el DNI
+        window.location.href = `/ciudadano/encontrado/${dni}`; // Redirigir a la ruta con el DNI
         document.getElementById("spinner").style.display = "none";
         document.getElementById("nextBtnText").innerText = "Siguiente";
         document.getElementById("nextBtn").disabled = false;
@@ -165,12 +165,10 @@ function continueRegistration() {
 // === FUNCIÓN: COMPLETAR REGISTRO FINAL ===
 function finalizeRegistration() {
   const whatsapp = document.getElementById("whatsapp").value.trim();
-  const bingoCode = document.getElementById("bingoCode").value.trim();
   const termsCheckbox = document.getElementById("terms");
 
-  if (whatsapp && bingoCode && termsCheckbox.checked) {
+  if (whatsapp && termsCheckbox.checked) {
     showStep(4);
-    ticketNumber.innerText = "XYZ123";
     progressBar.style.width = "100%";
   } else {
     alert("Por favor completa todos los campos y acepta los términos.");
@@ -186,7 +184,6 @@ const finalizeBtn = document.getElementById("finalizeBtn");
 function checkFormCompletion() {
   if (
     whatsappInput.value.trim() &&
-    bingoInput.value.trim() &&
     termsCheckbox.checked
   ) {
     finalizeBtn.disabled = false;
@@ -196,9 +193,8 @@ function checkFormCompletion() {
 }
 
 // Escuchar eventos
-if (whatsappInput && bingoInput && termsCheckbox) {
+if (whatsappInput && termsCheckbox) {
   whatsappInput.addEventListener("input", checkFormCompletion);
-  bingoInput.addEventListener("input", checkFormCompletion);
   termsCheckbox.addEventListener("change", checkFormCompletion);
 }
 
