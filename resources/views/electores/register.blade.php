@@ -37,7 +37,7 @@
           </div>
           <div class="step-content">
             <label class="color-fuerte padding-10">Número de DNI</label>
-            <input type="text" id="dni" name="dni" class="form-control" placeholder="12345678" maxlength="8" />
+            <input type="number" id="dni" name="dni" class="form-control" placeholder="12345678" maxlength="8" />
             <div id="dniError" class="text-danger" style="display: none;">Ingresa un DNI válido (8 dígitos).</div>
             <button id="nextBtn" type="button" class="btn btn-custom w-100 mt-3" onclick="nextStep(1)" disabled> 
               <span id="spinner" class="spinner-border spinner-border-sm" style="display: none;" role="status"></span>
@@ -89,7 +89,7 @@
             <div class="step-content">
               <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">+51</span>
-                    <input type="text" id="whatsapp" name="whatsapp" class="form-control" placeholder="Ej: 987654321" aria-describedby="basic-addon1">
+                    <input type="number" id="whatsapp" name="whatsapp" class="form-control" placeholder="Ej: 987654321" aria-describedby="basic-addon1">
                 </div>
                 
                 <input type="text" id="bingoCode" name="bingoCode" class="form-control mt-3" placeholder="Número de ticked">
