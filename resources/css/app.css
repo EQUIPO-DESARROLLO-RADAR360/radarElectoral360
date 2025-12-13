@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import 'flowbite';
+@import 'flowbite/dist/flowbite.min.css';
+@import 'datatables.net-dt/css/jquery.dataTables.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    transition-property: color, background-color;
+    transition-duration: 300ms;
+    overflow-y: scroll;
+    /* Force scrollbar to prevent layout shift */
+  }
+
+  body[data-theme='dark'] {
+    background-color: #0f172a;
+    color: #e2e8f0;
+  }
+}
+
+@layer components {
+
+  /* Alias .sidebar styles if needed, or rely on legacy. 
+     We focus on fixing the layout margins and theme support. */
+  .sidebar {
+    @apply fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col border-r border-slate-200 bg-white text-slate-800 shadow-2xl shadow-slate-200/60 backdrop-blur transition-all duration-300 dark:border-slate-800/60 dark:bg-slate-900/95 dark:text-gray-100 dark:shadow-slate-900/40;
+  }
+
+  /* Support BOTH .main-shell (new) and .main-wrapper (legacy) */
+  .main-shell,
+  .main-wrapper {
+    @apply flex min-h-screen flex-1 flex-col bg-white transition-[margin] duration-300 dark:bg-slate-900/60;
+  }
+
+  /* Ensure top-header respects dark mode if it relies on default bg */
+  .top-header {
+    @apply dark:bg-slate-900 dark:border-b dark:border-slate-800 transition-colors duration-300;
+  }
+
+  .btn-icon {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500;
+  }
+
+  /* DataTables Dark Mode Overrides - ROBUST */
+  [data-theme='dark'] .dataTables_wrapper {
+    color: #cbd5e1 !important;
+    /* slate-300 */
+  }
+
+  /* Table Background & Borders */
+  [data-theme='dark'] table.dataTable {
+    background-color: #0f172a !important;
+    /* slate-900 */
+    border-color: #1e293b !important;
+    /* slate-800 */
+    border-bottom: 1px solid #1e293b !important;
+  }
+
+  /* Header */
+  [data-theme='dark'] table.dataTable thead th,
+  [data-theme='dark'] table.dataTable thead td {
+    background-color: #020617 !important;
+    /* slate-950 */
+    border-bottom: 1px solid #1e293b !important;
+    /* slate-800 */
+    color: #f8fafc !important;
+    /* slate-50 */
+  }
+
+  /* Body Rows & Cells */
+  [data-theme='dark'] table.dataTable tbody tr {
+    background-color: #0f172a !important;
+    /* slate-900 */
+    color: #cbd5e1 !important;
+    /* slate-300 */
+    border-color: #1e293b !important;
+  }
+
+  [data-theme='dark'] table.dataTable tbody tr.odd {
+    background-color: #0f172a !important;
+  }
+
+  [data-theme='dark'] table.dataTable tbody tr.even {
+    background-color: #1e293b !important;
+    /* slate-800 slight contrast if needed, or keep slate-900 */
+  }
+
+  [data-theme='dark'] table.dataTable tbody td {
+    border-color: #1e293b !important;
+    /* slate-800 */
+  }
+
+  /* Hover */
+  [data-theme='dark'] table.dataTable tbody tr:hover,
+  [data-theme='dark'] table.dataTable tbody tr:hover>.sorting_1 {
+    background-color: #1e293b !important;
+    /* slate-800 */
+    color: #f8fafc !important;
+  }
+
+  /* Inputs (Search, Length) */
+  [data-theme='dark'] .dataTables_wrapper .dataTables_filter input,
+  [data-theme='dark'] .dataTables_wrapper .dataTables_length select {
+    background-color: #0f172a !important;
+    /* slate-900 */
+    border: 1px solid #334155 !important;
+    /* slate-700 */
+    color: #f8fafc !important;
+    /* white */
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  [data-theme='dark'] .dataTables_wrapper .dataTables_filter input:focus,
+  [data-theme='dark'] .dataTables_wrapper .dataTables_length select:focus {
+    border-color: #3b82f6 !important;
+    /* blue-500 */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  }
+
+  /* Info & Pagination */
+  [data-theme='dark'] .dataTables_wrapper .dataTables_info,
+  [data-theme='dark'] .dataTables_wrapper .dataTables_processing,
+  [data-theme='dark'] .dataTables_wrapper .dataTables_paginate {
+    color: #94a3b8 !important;
+    /* slate-400 */
+  }
+
+  [data-theme='dark'] .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #cbd5e1 !important;
+    border: 1px solid #334155 !important;
+    /* slate-700 */
+    background: #0f172a !important;
+    /* slate-900 */
+  }
+
+  [data-theme='dark'] .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    background: #1e293b !important;
+    /* slate-800 */
+    border-color: #475569 !important;
+  }
+
+  [data-theme='dark'] .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+  [data-theme='dark'] .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: white !important;
+    background: #2563eb !important;
+    /* blue-600 */
+    border-color: #1e40af !important;
+  }
+
+  [data-theme='dark'] .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+  [data-theme='dark'] .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+  [data-theme='dark'] .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    color: #475569 !important;
+    /* slate-600 */
+    background: transparent !important;
+    border-color: #1e293b !important;
+    cursor: not-allowed;
+  }
+}
+
+@layer utilities {
+  .sidebar.active {
+    @apply translate-x-0;
+  }
+
+  .sidebar.collapsed {
+    @apply w-20;
+  }
+
+  .sidebar.collapsed .sidebar-text {
+    @apply hidden;
+  }
+
+  .sidebar.collapsed .material-symbols-rounded {
+    @apply mr-0;
+  }
+
+  #sidebarOverlay {
+    @apply fixed inset-0 z-30 hidden bg-slate-900/60 backdrop-blur;
+  }
+
+  #sidebarOverlay.active {
+    @apply block;
+  }
+}
+
+@layer components {
+  .dataTables_paginate .paginate_button {
+    @apply text-sm rounded-lg px-3 py-1 font-medium bg-gray-50 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    transform: translateX(0);
+  }
+
+  /* Apply margin logic to BOTH .main-shell and .main-wrapper */
+  body.sidebar-collapsed .main-shell,
+  body.sidebar-collapsed .main-wrapper {
+    margin-left: 5rem;
+  }
+
+  body:not(.sidebar-collapsed) .main-shell,
+  body:not(.sidebar-collapsed) .main-wrapper {
+    margin-left: 16rem;
+  }
+
+  #sidebarOverlay {
+    display: none !important;
+  }
+}
