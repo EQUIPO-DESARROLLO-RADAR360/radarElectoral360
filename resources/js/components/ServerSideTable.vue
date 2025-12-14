@@ -5,8 +5,8 @@
             <div class="flex items-center space-x-3">
                 <label class="text-sm font-medium text-gray-700 dark:text-slate-400">Mostrar</label>
                 <div class="relative">
-                    <select v-model="length" @change="updateLength"
-                        class="appearance-none bg-white dark:bg-slate-900/40 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-slate-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-3 pr-8 py-2 transition-all hover:bg-gray-50 dark:hover:bg-white/5 hover:border-gray-400 dark:hover:border-white/20">
+                    <select v-model="length" @change="updateLength" :disabled="loading"
+                        class="appearance-none bg-white dark:bg-slate-900/40 border border-gray-300 dark:border-white/10 text-gray-900 dark:text-slate-200 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-3 pr-8 py-2 transition-all hover:bg-gray-50 dark:hover:bg-white/5 hover:border-gray-400 dark:hover:border-white/20 disabled:opacity-50 disabled:cursor-wait">
                         <option :value="10" class="dark:bg-slate-900">10</option>
                         <option :value="25" class="dark:bg-slate-900">25</option>
                         <option :value="50" class="dark:bg-slate-900">50</option>
@@ -24,14 +24,24 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                 </div>
-                <input type="text" v-model="search" @input="updateSearch"
-                    class="block w-full p-2.5 pl-10 text-sm text-gray-900 dark:text-slate-200 border border-gray-300 dark:border-white/10 rounded-lg bg-white dark:bg-slate-900/40 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500 dark:placeholder-slate-400 transition-all hover:bg-gray-50 dark:hover:bg-white/5 hover:border-gray-400 dark:hover:border-white/20"
+                <input type="text" v-model="search" @input="updateSearch" :disabled="loading"
+                    class="block w-full p-2.5 pl-10 text-sm text-gray-900 dark:text-slate-200 border border-gray-300 dark:border-white/10 rounded-lg bg-white dark:bg-slate-900/40 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500 dark:placeholder-slate-400 transition-all hover:bg-gray-50 dark:hover:bg-white/5 hover:border-gray-400 dark:hover:border-white/20 disabled:opacity-50 disabled:cursor-wait"
                     placeholder="Buscar...">
             </div>
         </div>
 
         <!-- Desktop View: Headless DataTable -->
-        <div class="hidden md:block bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden transition-colors duration-300">
+        <div class="hidden md:block bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden transition-colors duration-300 relative group">
+            
+            <!-- Loading Overlay -->
+            <div v-if="loading" class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm transition-all duration-300">
+                 <svg class="animate-spin h-10 w-10 text-blue-600 dark:text-blue-500 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="text-sm font-semibold text-gray-600 dark:text-slate-300 animate-pulse">Buscando registros...</span>
+            </div>
+
             <div class="relative overflow-x-auto max-w-full">
                 <table ref="tableRef" class="w-full text-sm text-left text-gray-500 dark:text-slate-400 table-fixed dataTable">
                     <thead class="text-xs text-gray-700 dark:text-slate-300 uppercase bg-gray-50 dark:bg-slate-950/50 border-b border-gray-200 dark:border-slate-800">
@@ -49,11 +59,11 @@
                     Mostrando <span class="font-bold text-gray-900 dark:text-white">{{ from }}</span> a <span class="font-bold text-gray-900 dark:text-white">{{ to }}</span> de <span class="font-bold text-gray-900 dark:text-white">{{ total }}</span> entradas
                 </span>
                 <div class="inline-flex rounded-md shadow-sm">
-                    <button @click="prevPage" :disabled="page === 1"
+                    <button @click="prevPage" :disabled="page === 1 || loading"
                         class="eventos-pagination-btn relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-l-lg border border-gray-300 dark:border-white/10 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
                         Anterior
                     </button>
-                    <button @click="nextPage" :disabled="to >= total"
+                    <button @click="nextPage" :disabled="to >= total || loading"
                         class="eventos-pagination-btn relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-r-lg border-t border-b border-r border-gray-300 dark:border-white/10 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
                         Siguiente
                     </button>
@@ -162,16 +172,22 @@ const initDataTable = () => {
         to.value = info.end;
         
         // Sync data for Mobile View
-        // Note: ajax.json() returns the full response object
         const json = dtInstance.value.ajax.json();
         if (json && json.data) {
             mobileData.value = json.data;
         }
-        loading.value = false;
+        // NOTE: We don't set loading = false here anymore to avoid flicker,
+        // we use 'xhr' event instead.
     });
     
+    // Start Loading
     dtInstance.value.on('preXhr', () => {
         loading.value = true;
+    });
+
+    // End Loading (Success or Error)
+    dtInstance.value.on('xhr', () => {
+        loading.value = false;
     });
 };
 
