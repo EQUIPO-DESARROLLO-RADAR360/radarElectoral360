@@ -31,7 +31,7 @@
         </div>
 
         <!-- Desktop View: Headless DataTable -->
-        <div class="hidden md:block bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden transition-colors duration-300 relative group">
+        <div class="hidden md:block bg-white dark:bg-slate-900 ring-1 ring-gray-300 dark:ring-white/10 rounded-lg shadow-xl overflow-hidden transition-colors duration-300 relative group">
             
             <!-- Loading Overlay -->
             <div v-if="loading" class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm transition-all duration-300">
