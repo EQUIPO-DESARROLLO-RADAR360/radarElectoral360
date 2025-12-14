@@ -55,13 +55,22 @@
         html.dark .top-header button:hover {
             background-color: rgba(255, 255, 255, 0.05) !important;
         }
+
+        /* CRITICAL: Force Sidebar Consistency Globally */
+        #sidebar {
+            width: 256px !important;
+            min-width: 256px !important;
+            max-width: 256px !important;
+            flex: 0 0 256px !important;
+            box-sizing: border-box !important;
+        }
     </style>
 </head>
 
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
-        <aside class="sidebar shrink-0 w-64" id="sidebar">
+        <aside class="sidebar w-64 min-w-[16rem] shrink-0" id="sidebar">
             <div class="sidebar-header">
                 <a href="{{ route('dashboard') }}" class="sidebar-brand">
                     <span class="material-icons-outlined me-2">radar</span>

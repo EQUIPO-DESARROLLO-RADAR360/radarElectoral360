@@ -29,7 +29,7 @@
   /* Alias .sidebar styles if needed, or rely on legacy. 
      We focus on fixing the layout margins and theme support. */
   .sidebar {
-    @apply fixed inset-y-0 left-0 z-40 flex w-64 -translate-x-full flex-col border-r border-slate-200 bg-white text-slate-800 shadow-2xl shadow-slate-200/60 backdrop-blur transition-all duration-300 dark:border-slate-800/60 dark:bg-slate-900/95 dark:text-gray-100 dark:shadow-slate-900/40;
+    @apply fixed inset-y-0 left-0 z-40 flex w-64 min-w-[16rem] shrink-0 -translate-x-full flex-col border-r border-slate-200 bg-white text-slate-800 shadow-2xl shadow-slate-200/60 backdrop-blur transition-all duration-300 dark:border-slate-800/60 dark:bg-slate-900/95 dark:text-gray-100 dark:shadow-slate-900/40;
   }
 
   /* Support BOTH .main-shell (new) and .main-wrapper (legacy) */
@@ -37,6 +37,8 @@
   .main-wrapper {
     @apply flex min-h-screen flex-1 flex-col bg-white transition-[margin] duration-300 dark:bg-slate-900/60;
   }
+
+
 
   /* Ensure top-header respects dark mode if it relies on default bg */
   .top-header {
