@@ -24,7 +24,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                 </div>
-                <input type="text" v-model="search" @input="updateSearch" :disabled="loading"
+                <input type="text" v-model="search" @input="updateSearch"
                     class="block w-full p-2.5 pl-10 text-sm text-gray-900 dark:text-slate-200 border border-gray-300 dark:border-white/10 rounded-lg bg-white dark:bg-slate-900/40 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500 dark:placeholder-slate-400 transition-all hover:bg-gray-50 dark:hover:bg-white/5 hover:border-gray-400 dark:hover:border-white/20 disabled:opacity-50 disabled:cursor-wait"
                     placeholder="Buscar...">
             </div>
