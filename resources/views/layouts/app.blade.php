@@ -61,7 +61,7 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
+        <aside class="sidebar shrink-0 w-64" id="sidebar">
             <div class="sidebar-header">
                 <a href="{{ route('dashboard') }}" class="sidebar-brand">
                     <span class="material-icons-outlined me-2">radar</span>
@@ -135,7 +135,7 @@
         </aside>
 
         <!-- Main Content Area -->
-        <div class="main-wrapper">
+        <div class="main-wrapper flex-1 min-w-0 overflow-x-hidden">
             <!-- Top Header -->
             <header
                 class="top-header flex items-center justify-between px-6 py-3 bg-white border-b border-gray-200 dark:bg-slate-900 dark:border-slate-800 transition-colors duration-300">

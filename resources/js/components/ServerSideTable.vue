@@ -32,7 +32,7 @@
 
         <!-- Desktop View: Headless DataTable -->
         <div class="hidden md:block bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden transition-colors duration-300">
-            <div class="relative overflow-x-auto">
+            <div class="relative overflow-x-auto max-w-full">
                 <table ref="tableRef" class="w-full text-sm text-left text-gray-500 dark:text-slate-400 table-fixed dataTable">
                     <thead class="text-xs text-gray-700 dark:text-slate-300 uppercase bg-gray-50 dark:bg-slate-950/50 border-b border-gray-200 dark:border-slate-800">
                         <!-- Header populated by DataTables -->
