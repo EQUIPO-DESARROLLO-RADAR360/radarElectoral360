@@ -201,6 +201,68 @@
     /* slate-400 */
   }
 
+  /* --- SCOPED OVERRIDES FOR EVENTOS MODULE --- */
+  /* These only apply when body has .theme-eventos class */
+
+  /* Scoped Header Fix */
+  body.theme-eventos [data-theme='dark'] .top-header {
+    background-color: #0f172a !important;
+    /* slate-900 */
+    border-color: #1e293b !important;
+    /* slate-800 */
+  }
+
+  body.theme-eventos [data-theme='dark'] .top-header .material-icons-outlined,
+  body.theme-eventos [data-theme='dark'] .top-header .material-icons,
+  body.theme-eventos [data-theme='dark'] .top-header button {
+    color: #e2e8f0 !important;
+  }
+
+  body.theme-eventos [data-theme='dark'] .top-header button:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  /* Scoped Ghost Controls (Inputs / Selects) */
+  body.theme-eventos [data-theme='dark'] input[type="text"],
+  body.theme-eventos [data-theme='dark'] select,
+  body.theme-eventos [data-theme='dark'] .dataTables_filter input,
+  body.theme-eventos [data-theme='dark'] .dataTables_length select {
+    background-color: rgba(15, 23, 42, 0.4) !important;
+    /* slate-900/40 */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    /* white/10 */
+    color: #e2e8f0 !important;
+  }
+
+  /* Scoped Pagination */
+  body.theme-eventos [data-theme='dark'] .dataTables_paginate .paginate_button,
+  body.theme-eventos [data-theme='dark'] button.paginate_button,
+  body.theme-eventos [data-theme='dark'] .eventos-pagination-btn {
+    background-color: rgba(15, 23, 42, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #cbd5e1 !important;
+  }
+
+  body.theme-eventos [data-theme='dark'] .dataTables_paginate .paginate_button:hover,
+  body.theme-eventos [data-theme='dark'] button.paginate_button:hover,
+  body.theme-eventos [data-theme='dark'] .eventos-pagination-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+  }
+
+  /* Scoped Filter Buttons */
+  body.theme-eventos [data-theme='dark'] .eventos-filter-btn:not(.bg-blue-600):not(.bg-emerald-600):not(.bg-slate-600) {
+    background-color: rgba(15, 23, 42, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #e2e8f0 !important;
+  }
+
+  body.theme-eventos [data-theme='dark'] .eventos-filter-btn:not(.bg-blue-600):hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  /* --- END SCOPED OVERRIDES --- */
+
   [data-theme='dark'] .dataTables_wrapper .dataTables_paginate .paginate_button.current,
   [data-theme='dark'] .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: white !important;
@@ -271,4 +333,40 @@
   #sidebarOverlay {
     display: none !important;
   }
+}
+
+/* --- SCOPED OVERRIDES FOR EVENTOS MODULE (Re-applied) --- */
+/* Target ID #eventos-page which wraps the EventosIndex component */
+
+[data-theme='dark'] #eventos-page .eventos-filter-btn:not(.is-active),
+[data-theme='dark'] #eventos-page .eventos-pagination-btn {
+  background-color: rgba(15, 23, 42, 0.4) !important;
+  /* slate-900/40 */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  /* white/10 */
+  color: #e2e8f0 !important;
+  /* slate-200 */
+}
+
+[data-theme='dark'] #eventos-page .eventos-filter-btn:not(.is-active):hover,
+[data-theme='dark'] #eventos-page .eventos-pagination-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  /* white/5 */
+  color: #ffffff !important;
+}
+
+/* Active State (Selected Filter) */
+[data-theme='dark'] #eventos-page .eventos-filter-btn.is-active {
+  /* Retain specific color logic via utility classes + specific overrides if needed, 
+     but user asked for blue active state. The Vue binding handles colored active states (blue, emerald, slate).
+     We just ensure border/color contrast is correct. */
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* Disabled State */
+[data-theme='dark'] #eventos-page .eventos-pagination-btn:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  /* background-color: transparent !important; REMOVED */
 }

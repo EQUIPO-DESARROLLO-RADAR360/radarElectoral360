@@ -50,11 +50,11 @@
                 </span>
                 <div class="inline-flex rounded-md shadow-sm">
                     <button @click="prevPage" :disabled="page === 1"
-                        class="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-l-lg border border-gray-300 dark:border-white/10 bg-white dark:bg-slate-900/40 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                        class="eventos-pagination-btn relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-l-lg border border-gray-300 dark:border-white/10 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
                         Anterior
                     </button>
                     <button @click="nextPage" :disabled="to >= total"
-                        class="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-r-lg border-t border-b border-r border-gray-300 dark:border-white/10 bg-white dark:bg-slate-900/40 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                        class="eventos-pagination-btn relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-r-lg border-t border-b border-r border-gray-300 dark:border-white/10 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
                         Siguiente
                     </button>
                 </div>

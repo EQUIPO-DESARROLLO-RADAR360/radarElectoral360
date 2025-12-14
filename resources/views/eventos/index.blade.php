@@ -45,4 +45,13 @@
     <!-- Modal Include -->
     <!-- Placed strictly at the end of the content to function correctly with Flowbite JS and z-indexes -->
     @include('eventos.partials.modal-create')
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.body.classList.add('theme-eventos');
+            });
+            // Cleanup not strictly necessary as navigating away reloads, but good practice if using Pjax later (which we aren't).
+        </script>
+    @endpush
 @endsection

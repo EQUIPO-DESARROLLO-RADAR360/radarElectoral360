@@ -1,21 +1,25 @@
 <template>
-    <div class="space-y-6">
+    <div id="eventos-page" class="space-y-6">
         <!-- Quick Filters -->
         <div class="flex flex-wrap gap-2">
             <button @click="filter = 'all'"
-                :class="['px-6 py-2 text-sm font-semibold rounded-full transition-all duration-200 shadow-sm', filter === 'all' ? 'bg-blue-600 text-white shadow-blue-500/30 ring-2 ring-blue-500 ring-offset-2 ring-offset-gray-100 dark:ring-offset-slate-900' : 'bg-white dark:bg-slate-800 text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-slate-700']">
+                class="eventos-filter-btn px-6 py-2 text-sm font-semibold rounded-full transition-all duration-200 shadow-sm bg-white text-gray-500 border border-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-900"
+                :class="{ 'is-active bg-blue-600 text-white shadow-blue-500/30 ring-2 ring-blue-500 ring-offset-2 ring-offset-gray-100 dark:ring-offset-slate-900 border-transparent': filter === 'all' }">
                 Todos
             </button>
             <button @click="filter = 'upcoming'"
-                :class="['px-6 py-2 text-sm font-semibold rounded-full transition-all duration-200 shadow-sm', filter === 'upcoming' ? 'bg-blue-600 text-white shadow-blue-500/30 ring-2 ring-blue-500 ring-offset-2 ring-offset-gray-100 dark:ring-offset-slate-900' : 'bg-white dark:bg-slate-800 text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-slate-700']">
+                class="eventos-filter-btn px-6 py-2 text-sm font-semibold rounded-full transition-all duration-200 shadow-sm bg-white text-gray-500 border border-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-900"
+                :class="{ 'is-active bg-blue-600 text-white shadow-blue-500/30 ring-2 ring-blue-500 ring-offset-2 ring-offset-gray-100 dark:ring-offset-slate-900 border-transparent': filter === 'upcoming' }">
                 Próximos
             </button>
             <button @click="filter = 'active'"
-                :class="['px-6 py-2 text-sm font-semibold rounded-full transition-all duration-200 shadow-sm', filter === 'active' ? 'bg-emerald-600 text-white shadow-emerald-500/30 ring-2 ring-emerald-500 ring-offset-2 ring-offset-gray-100 dark:ring-offset-slate-900' : 'bg-white dark:bg-slate-800 text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-slate-700']">
+                class="eventos-filter-btn px-6 py-2 text-sm font-semibold rounded-full transition-all duration-200 shadow-sm bg-white text-gray-500 border border-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-900"
+                :class="{ 'is-active bg-emerald-600 text-white shadow-emerald-500/30 ring-2 ring-emerald-500 ring-offset-2 ring-offset-gray-100 dark:ring-offset-slate-900 border-transparent': filter === 'active' }">
                 Activos
             </button>
             <button @click="filter = 'finished'"
-                :class="['px-6 py-2 text-sm font-semibold rounded-full transition-all duration-200 shadow-sm', filter === 'finished' ? 'bg-slate-600 text-white shadow-slate-500/30 ring-2 ring-slate-500 ring-offset-2 ring-offset-gray-100 dark:ring-offset-slate-900' : 'bg-white dark:bg-slate-800 text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-900 dark:hover:text-white border border-gray-200 dark:border-slate-700']">
+                class="eventos-filter-btn px-6 py-2 text-sm font-semibold rounded-full transition-all duration-200 shadow-sm bg-white text-gray-500 border border-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-gray-900"
+                :class="{ 'is-active bg-slate-600 text-white shadow-slate-500/30 ring-2 ring-slate-500 ring-offset-2 ring-offset-gray-100 dark:ring-offset-slate-900 border-transparent': filter === 'finished' }">
                 Finalizados
             </button>
         </div>
