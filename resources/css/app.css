@@ -370,3 +370,28 @@
   cursor: not-allowed !important;
   /* background-color: transparent !important; REMOVED */
 }
+
+/* Active State (Selected Filter) - Semantic Variants (SPECIFICITY OVERRIDE) */
+[data-theme='dark'] #eventos-page .eventos-filter-btn.is-active.variant-blue {
+  background-color: rgb(37, 99, 235) !important;
+  /* blue-600 */
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.4) !important;
+}
+
+[data-theme='dark'] #eventos-page .eventos-filter-btn.is-active.variant-emerald {
+  background-color: rgb(16, 185, 129) !important;
+  /* emerald-500 */
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4) !important;
+}
+
+[data-theme='dark'] #eventos-page .eventos-filter-btn.is-active.variant-slate {
+  background-color: rgb(71, 85, 105) !important;
+  /* slate-600 */
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px rgba(71, 85, 105, 0.4) !important;
+}
