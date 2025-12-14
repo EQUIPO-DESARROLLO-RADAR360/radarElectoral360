@@ -30,6 +30,32 @@
     <link href="{{ asset('css/design-system.css') }}" rel="stylesheet">
 
     @stack('styles')
+
+    <style>
+        /* CRITICAL: Force Header Dark Mode Global Override */
+        [data-theme='dark'] .top-header,
+        html.dark .top-header {
+            background-color: #0f172a !important;
+            /* bg-slate-900 */
+            border-bottom-color: #1e293b !important;
+            /* border-slate-800 */
+            color: #f1f5f9 !important;
+            /* text-slate-100 */
+        }
+
+        [data-theme='dark'] .top-header .material-icons-outlined,
+        html.dark .top-header .material-icons-outlined,
+        [data-theme='dark'] .top-header button,
+        html.dark .top-header button {
+            color: #e2e8f0 !important;
+            /* text-slate-200 */
+        }
+
+        [data-theme='dark'] .top-header button:hover,
+        html.dark .top-header button:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+    </style>
 </head>
 
 <body>
